@@ -113,6 +113,8 @@ int main()
 
 		/* print the maze */
 		// maze[y * 2 + 1][x * 4 + 2] = 'O';
+		// puts("\033[?25l");
+		// puts("\033[0;0H");
 		// for (int i = 0; i < MAZE_SIZE * 2 + 1; i++) {
 		// 	puts(maze[i]);
 		// }
