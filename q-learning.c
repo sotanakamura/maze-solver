@@ -10,6 +10,7 @@
 #define HIT_REWARD -10
 #define DISCOUNT_RATE 0.9
 #define LERANING_RATE 0.1
+#define STEP 1000000
 
 char maze[MAZE_SIZE * 2 + 1][MAZE_SIZE * 4 + 2] = {
 	"+---+---+---+---+",
@@ -35,7 +36,7 @@ enum direction
 int main()
 {
 	/* learning */
-	for(int step = 0; step < 1000000; step++) {
+	for(int step = 0; step < STEP; step++) {
 		/* take an action */
 		double num = (double)rand() / RAND_MAX;
 		double prob[4];
@@ -111,17 +112,20 @@ int main()
 					- Q[pre_y][pre_x][action];
 		Q[pre_y][pre_x][action] += LERANING_RATE * delta;
 
-		/* print the maze */
-		// maze[y * 2 + 1][x * 4 + 2] = 'O';
-		// puts("\033[?25l");
-		// puts("\033[0;0H");
-		// for (int i = 0; i < MAZE_SIZE * 2 + 1; i++) {
-		// 	puts(maze[i]);
-		// }
-		// maze[y * 2 + 1][x * 4 + 2] = ' ';
-		
-		/* sleep */
-		//for (int i = 0; i < 100000000; i++) {}
+		if (step < 50 || STEP - step < 50) {
+			/* print the maze */
+			maze[y * 2 + 1][x * 4 + 2] = 'O';
+			puts("\033[?25l");
+			puts("\033[0;0H");
+			printf("step: %d\n", step);
+			for (int i = 0; i < MAZE_SIZE * 2 + 1; i++) {
+				puts(maze[i]);
+			}
+			maze[y * 2 + 1][x * 4 + 2] = ' ';
+			
+			/* sleep */
+			for (int i = 0; i < 100000000; i++) {}
+		}
 		
 		/* reset */
 		if (x == GOALX && y == GOALY) {
