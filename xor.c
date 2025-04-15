@@ -81,7 +81,7 @@ int main()
             }
             
             if (k % 1000 == 0)
-                printf("input: {%lf, %lf}, output: %lf\n", input[c][0], input[c][1], out[0]);
+                printf("input: {%1.0lf, %1.0lf}, output: %1.0lf\n", input[c][0], input[c][1], out[0]);
             e += 1.0 / 2 * pow(out[0] - dout[c], 2);
     
             for (int i = 0; i < OUTPUT_DIM; i++) {
